@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h1>Login</h1>
+    <h1>Subscribe</h1>
 
     <form @submit.prevent="login">
       <p v-if="formError" class="error">{{ formError }}</p>
@@ -14,10 +14,6 @@
       </p>
       <button type="submit">Login</button>
     </form>
-    <div>
-      No account yet ?
-      <nuxt-link to="/subscribe" :prefetch="true">Create an account</nuxt-link>
-    </div>
   </div>
 </template>
 
@@ -35,12 +31,12 @@ export default {
   methods: {
     async login() {
       try {
-        const ret = await axios.post(`${process.env.baseUrl}/v1/user/connect`, {
+        const ret = await axios.post(`${process.env.baseUrl}/v1/user`, {
           name: this.username,
           password: this.password
         })
 
-        if (ret.status == 200) {
+        if (ret.status == 201) {
           this.$router.push('/home')
         }
       } catch (e) {
