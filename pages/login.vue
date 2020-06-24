@@ -44,7 +44,7 @@ export default {
         if (ret.status == 200) {
           const token = ret.data.token
           this.$store.commit('setToken', token) // mutating to store for client rendering
-          Cookie.set('token', token) // saving token in cookie for server rendering
+          Cookie.set('token', token, {'sameSite': 'Lax'}) // saving token in cookie for server rendering
           this.$router.push('/home')
         }
       } catch (e) {
