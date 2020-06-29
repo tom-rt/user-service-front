@@ -5,15 +5,16 @@
   "author": "Thomas Raout",
   "private": true,
   "scripts": {
-    "dev": "nuxt",
+    "dev": "nuxt --hostname localhost --port 3333",
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate"
   },
   "dependencies": {
+    "@nuxtjs/auth": "^4.9.1",
     "@nuxtjs/axios": "^5.11.0",
     "js-cookie": "^2.2.1",
-    "nuxt": "^2.12.2"
+    "nuxt": "^2.13.2"
   },
   "devDependencies": {
     "@nuxt/typescript-build": "^0.6.0",

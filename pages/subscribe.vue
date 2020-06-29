@@ -2,7 +2,7 @@
   <div class="container">
     <h1>Subscribe</h1>
 
-    <form @submit.prevent="login">
+    <form @submit.prevent="subscribe">
       <p v-if="formError" class="error">{{ formError }}</p>
       <p>
         Username:
@@ -29,16 +29,23 @@ export default {
     }
   },
   methods: {
-    async login() {
+    async subscribe() {
       try {
         const ret = await axios.post(`${process.env.baseUrl}/v1/user`, {
           name: this.username,
           password: this.password
         })
 
-        if (ret.status == 201) {
-          this.$router.push('/home')
-        }
+        // if (ret.status == 201) {
+        //   this.$router.push('/home')
+        // }
+
+        this.$auth.loginWith('local', {
+          data: {
+            name: this.username,
+            password: this.password
+          }
+        })
       } catch (e) {
         this.formError = e.message
       }

@@ -1,7 +1,8 @@
 <template>
   <div>
     <h1>HOME</h1>
-    {{ $store.state.counter }}
+    <div v-if="$auth.loggedIn">LOGGED IN{{$auth.user}}</div>
+    <div v-else>NOT LOGGED IN</div>
   </div>
 </template>
 
@@ -14,7 +15,8 @@ export default {
       password: ''
     }
   },
-  middleware: 'authenticated',
+  middleware: 'auth',
+  // middleware: 'authenticated',
   fetch() {
     console.log('Fetch', this.$store.state.token)
   },
