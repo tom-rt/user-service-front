@@ -6,24 +6,29 @@ export default {
         '@nuxtjs/axios',
         '@nuxtjs/auth'
     ],
-    env: {
-        baseUrl: process.env.BASE_URL || 'http://localhost:8081'
-    },
     build: {
         additionalExtensions: ['ts', 'tsx'],
     },
     auth: {
         strategies: {
             local: {
-                endpoints: {
-                    login: { url: '/user/connect', method: 'post', propertyName: 'token' },
-                    logout: { url: '/api/auth/logout', method: 'post' },
-                    user: { url: '/user', method: 'get', propertyName: 'user' }
+                scheme: 'refresh',
+                token: {
+                    property: 'token',
+                    maxAge: 1800,
+                    type: 'Bearer'
                 },
-                // tokenRequired: true,
-                tokenType: 'bearer',
-                // globalToken: true,
-                // autoFetchUser: true
+                user: {
+                    property: 'user',
+                    // autoFetch: true
+                },
+                endpoints: {
+                    login: { url: '/user/login', method: 'post', propertyName: 'token' },
+                    refresh: { url: '/refresh/tokeen', method: 'post' },
+                    user: false,
+                    logout: { url: '/user/:id/logout', method: 'post' },
+                },
+                // autoLogout: false
             }
         }
     }

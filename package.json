@@ -5,7 +5,8 @@
   "author": "Thomas Raout",
   "private": true,
   "scripts": {
-    "dev": "nuxt --hostname localhost --port 3333",
+    "dev": "nuxt",
+    "dev-arch": "nuxt --hostname localhost --port 3333",
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate"

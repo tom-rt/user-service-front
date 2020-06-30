@@ -36,23 +36,13 @@ export default {
   methods: {
     async login() {
       try {
-        this.$auth.loginWith('local', {
+        await this.$auth.loginWith('local', {
           data: {
             name: this.username,
             password: this.password
           }
         })
-
-        // const ret = await axios.post(`${process.env.baseUrl}/v1/user/connect`, {
-        //   name: this.username,
-        //   password: this.password
-        // })
-        // if (ret.status == 200) {
-        //   const token = ret.data.token
-        //   this.$store.commit('setToken', token) // mutating to store for client rendering
-        //   Cookie.set('token', token, {'sameSite': 'Lax'}) // saving token in cookie for server rendering
-        //   this.$router.push('/home')
-        // }
+        this.$router.push('/home')
       } catch (e) {
         this.formError = e.message
       }

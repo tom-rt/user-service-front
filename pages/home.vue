@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>HOME</h1>
-    <div v-if="$auth.loggedIn">LOGGED IN{{$auth.user}}</div>
+    <div v-if="$auth.loggedIn">LOGGED IN {{$auth.user}}</div>
     <div v-else>NOT LOGGED IN</div>
   </div>
 </template>
