@@ -1,26 +1,28 @@
 <template>
   <div>
     <h1>HOME</h1>
-    <div v-if="$auth.loggedIn">LOGGED IN {{$auth.user}}</div>
-    <div v-else>NOT LOGGED IN</div>
+    <form @submit.prevent="getUserData">
+      <p v-if="formError" class="error">{{ formError }}</p>
+      <button type="submit">Get user data</button>
+    </form>
   </div>
 </template>
 
 <script>
+import axios from 'axios'
+import { mapGetters } from 'vuex'
+
 export default {
   asyncData() {
     return {
-      formError: null,
-      username: '',
-      password: ''
+      formError: null
     }
   },
-  middleware: 'auth',
-  // middleware: 'authenticated',
-  fetch() {
-    console.log('Fetch', this.$store.state.token)
-  },
-  methods: {}
+  methods: {
+    async getUserData() {
+      console.log(this.$store.getters['getToken'])
+    }
+  }
 }
 </script>
 

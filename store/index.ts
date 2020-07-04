@@ -1,12 +1,17 @@
 export const state = () => ({
-    token: null
+    token: null,
+    userId: null
 })
 
 export const mutations = {
-    setToken(state, token) {
-        state.token = token
-    },
+    setConnection(state, payload) {
+        state.userId = payload.userId
+        state.token = payload.token
+    }
+}
+
+export const getters = {
     getToken(state) {
         return state.token
-    },
+    }
 }

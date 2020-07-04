@@ -21,7 +21,7 @@
 import axios from 'axios'
 
 export default {
-  data() {
+  asyncData() {
     return {
       formError: null,
       username: '',
@@ -37,12 +37,11 @@ export default {
         })
 
         if (ret.status == 201) {
-          await this.$auth.loginWith('local', {
-            data: {
-              name: this.username,
-              password: this.password
-            }
+          const tmp = await axios.post('http://localhost:8081/v1/user/login', {
+            name: this.username,
+            password: this.password
           })
+          this.$store.commit('setConnection', { token: 'ayyyyy', userId: 1 })
           this.$router.push('/home')
         }
       } catch (e) {

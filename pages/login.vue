@@ -36,12 +36,6 @@ export default {
   methods: {
     async login() {
       try {
-        await this.$auth.loginWith('local', {
-          data: {
-            name: this.username,
-            password: this.password
-          }
-        })
         this.$router.push('/home')
       } catch (e) {
         this.formError = e.message
