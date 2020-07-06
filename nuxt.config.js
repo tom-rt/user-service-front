@@ -5,7 +5,10 @@ export default {
     modules: [
         '@nuxtjs/axios',
     ],
+    plugins: [
+        '~/plugins/axios.ts'
+    ],
     build: {
         additionalExtensions: ['ts', 'tsx'],
-    },
+    }
 }

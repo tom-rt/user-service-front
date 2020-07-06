@@ -18,8 +18,6 @@
 </template>
 
 <script>
-import axios from 'axios'
-
 export default {
   asyncData() {
     return {
@@ -31,16 +29,19 @@ export default {
   methods: {
     async subscribe() {
       try {
-        const ret = await axios.post('http://localhost:8081/v1/user', {
+        const ret = await this.$axios.post('http://localhost:8081/v1/user', {
           name: this.username,
           password: this.password
         })
 
         if (ret.status == 201) {
-          const tmp = await axios.post('http://localhost:8081/v1/user/login', {
-            name: this.username,
-            password: this.password
-          })
+          const tmp = await this.$axios.post(
+            'http://localhost:8081/v1/user/login',
+            {
+              name: this.username,
+              password: this.password
+            }
+          )
           this.$store.commit('setConnection', { token: 'ayyyyy', userId: 1 })
           this.$router.push('/home')
         }

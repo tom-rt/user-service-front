@@ -22,7 +22,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 const Cookie = process.client ? require('js-cookie') : undefined
 
 export default {
