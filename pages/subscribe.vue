@@ -35,14 +35,18 @@ export default {
         })
 
         if (ret.status == 201) {
-          const tmp = await this.$axios.post(
+          const login = await this.$axios.post(
             'http://localhost:8081/v1/user/login',
             {
               name: this.username,
               password: this.password
             }
           )
-          this.$store.commit('setConnection', { token: 'ayyyyy', userId: 1 })
+          this.$store.commit('setConnection', {
+            token: login.data.token,
+            userId: login.data.userId
+          })
+          this.$axios.setToken(login.data.token, 'Bearer')
           this.$router.push('/home')
         }
       } catch (e) {

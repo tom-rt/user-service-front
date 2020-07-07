@@ -19,7 +19,10 @@ export default {
   },
   methods: {
     async getUserData() {
-      console.log(this.$store.getters['getToken'])
+      console.log('GETTTOKEN', this.$store.getters['getToken'])
+      const ret = await this.$axios.get(
+        `http://localhost:8081/v1/user/${this.$store.state.userId}`
+      )
     }
   }
 }
