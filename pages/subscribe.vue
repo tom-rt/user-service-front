@@ -33,6 +33,7 @@ export default {
           name: this.username,
           password: this.password
         })
+        console.log('dddd', ret)
 
         if (ret.status == 201) {
           const login = await this.$axios.post(
@@ -42,7 +43,7 @@ export default {
               password: this.password
             }
           )
-          this.$store.commit('setConnection', {
+          this.$store.commit('login', {
             token: login.data.token,
             userId: login.data.userId
           })
