@@ -29,25 +29,20 @@ export default {
   methods: {
     async subscribe() {
       try {
-        const ret = await this.$axios.post('http://localhost:8081/v1/user', {
+        const ret = await this.$axios.post('/user', {
           name: this.username,
           password: this.password
         })
-        console.log('dddd', ret)
 
         if (ret.status == 201) {
-          const login = await this.$axios.post(
-            'http://localhost:8081/v1/user/login',
-            {
-              name: this.username,
-              password: this.password
-            }
-          )
+          const login = await this.$axios.post('/user/login', {
+            name: this.username,
+            password: this.password
+          })
           this.$store.commit('login', {
             token: login.data.token,
             userId: login.data.userId
           })
-          this.$axios.setToken(login.data.token, 'Bearer')
           this.$router.push('/home')
         }
       } catch (e) {

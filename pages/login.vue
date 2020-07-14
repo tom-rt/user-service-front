@@ -35,7 +35,17 @@ export default {
   methods: {
     async login() {
       try {
-        this.$router.push('/home')
+        const login = await this.$axios.post('/user/login', {
+          name: this.username,
+          password: this.password
+        })
+        if (login.status == 200) {
+          this.$store.commit('login', {
+            token: login.data.token,
+            userId: login.data.userId
+          })
+          this.$router.push('/home')
+        }
       } catch (e) {
         this.formError = e.message
       }

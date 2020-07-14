@@ -9,17 +9,24 @@ export const mutations = {
         state.userId = payload.userId;
         state.token = payload.token;
         state.isConnected = true;
+        this.$cookies.set('token', state.token, {
+            path: '/',
+            maxAge: 60 * 60 * 24 * 7,
+            sameSite: "none",
+            secure: true
+        })
+    },
+    setToken(state, payload) {
+        state.token = payload.token;
+        state.isConnected = true;
+        this.$cookies.set('token', state.token, {
+            path: '/',
+            maxAge: 60 * 60 * 24 * 7
+        })
     },
     logout(state, payload) {
         state.userId = null;
         state.token = null;
         state.isConnected = false;
-    }
-
-}
-
-export const getters = {
-    getToken(state) {
-        return state.token
     }
 }

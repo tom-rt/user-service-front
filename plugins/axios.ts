@@ -1,19 +1,17 @@
 export default ({ $axios, store, redirect }) => {
    $axios.onRequest(config => {
-   })
-
-   $axios.onResponse(async ret => {
-      return ret
+      config.headers['Authorization'] = 'Bearer ' + store.state.token;
    })
 
    $axios.onResponseError(async err => {
-      console.log(err);
       if (err.response.status == 401 && err.response.data.message == "Token expired.") {
-         const refresh = await $axios.post('http://localhost:8081/v1/refresh/token')
+         const refresh = await $axios.post('/refresh/token')
          if (refresh.status == 200) {
-            $axios.setToken(refresh.data.token, 'Bearer')
             let originalRequest = err.config;
             originalRequest.headers['Authorization'] = 'Bearer ' + refresh.data.token;
+            this.$store.commit('setToken', {
+               token: refresh.data.token,
+            })
             return $axios(originalRequest);
          } else {
             store.state.token = null;
