@@ -6,6 +6,7 @@
       <p v-if="userData">{{ userData }}</p>
       <button type="submit">Get user data</button>
     </form>
+    <button v-on:click="disconnect">Disconnect</button>
   </div>
 </template>
 
@@ -24,6 +25,11 @@ export default {
     async getUserData() {
       const ret = await this.$axios.get(`/user/${this.$store.state.userId}`)
       this.userData = ret.data
+    },
+    async disconnect() {
+      await this.$axios.post(`/user/${this.$store.state.userId}/logout`)
+      this.$store.commit('logout')
+      this.$router.push('/login')
     }
   }
 }

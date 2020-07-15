@@ -24,9 +24,10 @@ export const mutations = {
             maxAge: 60 * 60 * 24 * 7
         })
     },
-    logout(state, payload) {
+    logout(state) {
         state.userId = null;
         state.token = null;
         state.isConnected = false;
+        this.$cookies.remove('token')
     }
 }

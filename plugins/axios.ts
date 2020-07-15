@@ -14,8 +14,8 @@ export default ({ $axios, store, redirect }) => {
             })
             return $axios(originalRequest);
          } else {
-            store.state.token = null;
-            store.state.id = null;
+
+            this.$store.commit('logout')
             redirect("/login")
          }
       } else {
