@@ -1,6 +1,8 @@
 # user-service-front
 
-> My neat Nuxt.js project
+This project is a simple front-end providing everything you need to handle authentication with JWT. I did it so I can use it as a seed to start any new project using JWT, feel free to do the same !
+
+It implements authentication middleware, guarded routes, cookie token storage to save the session, and axios interceptors to automatically refresh an expired token.
 
 ## Build Setup
 
