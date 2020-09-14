@@ -32,6 +32,7 @@ export default {
       password: ''
     }
   },
+  middleware: "login",
   methods: {
     async login() {
       try {
